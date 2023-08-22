@@ -1,1 +1,118 @@
-/*# sourceMappingURL=main.css.map */
+:root {
+  --primaryColor: #243261;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-div {
+  width: 720px;
+  margin: 0 auto;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#heading {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2em;
+  font-weight: 500;
+  margin: 0.5em;
+}
+
+#search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#search img {
+  cursor: pointer;
+  height: 2em;
+  width: 2em;
+}
+#search input[type=text] {
+  width: 60%;
+  border-radius: 8px;
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  border: 1px solid var(--primaryColor);
+}
+#search input[type=text]:focus {
+  outline-color: var(--primaryColor);
+  border-radius: 8px;
+}
+
+#list {
+  width: 80%;
+  margin: 1em auto;
+}
+#list ul {
+  list-style-type: none;
+}
+#list ul li {
+  border-bottom: 1px solid black;
+}
+#list ul li div {
+  padding: 8px 0 2px 0;
+  display: flex;
+  text-align: left;
+  justify-content: space-around;
+  align-items: center;
+}
+#list ul li div label {
+  width: 80%;
+}
+#list ul li div img {
+  cursor: pointer;
+  height: 1.2em;
+  width: 1.2em;
+}
+#list ul li:nth-last-child(1) {
+  border-bottom: 0px;
+}
+
+#dropdowns {
+  width: 100;
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#dropdowns select {
+  padding: 0.8em 1em;
+}
+#dropdowns select:focus {
+  outline: 1px solid blue;
+}
+#dropdowns #tab-bar {
+  border: 2px solid lightblue;
+  display: flex;
+}
+#dropdowns #tab-bar button {
+  background-color: lightblue;
+  border: none;
+  cursor: pointer;
+  padding: 0.8em 1em;
+}
+#dropdowns #tab-bar button:hover {
+  background-color: #ddd;
+}
+#dropdowns #tab-bar .active {
+  background-color: #ccc;
+}
+
+@media (max-width: 800px) {
+  .main-div {
+    width: 40rem;
+    overflow-x: scroll;
+  }
+}/*# sourceMappingURL=main.css.map */

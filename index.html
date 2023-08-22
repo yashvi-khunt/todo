@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <!-- Container Division for all contents -->
+    <div class="container">
+      <div class="main-div">
+        <!-- heading -->
+        <div id="heading">TODO - LIST</div>
+        <!-- heading -->
+
+        <!-- Search, Add and Searchbar-->
+        <div id="search">
+          <!-- Add Button -->
+          <img src="./images/add.svg" />
+
+          <!-- Search Bar-->
+          <input type="text" placeholder="Add new task" />
+
+          <!-- Search button-->
+          <img src="./images/search.svg" />
+        </div>
+        <!-- Search, Add and Searchbar-->
+
+        <!-- List of all tasks-->
+        <div id="list">
+          <ul>
+            <li>
+              <div class="list-item">
+                <label>fduhgvnjuf</label>
+                <img src="./images/edit.svg" />
+                <img src="./images/delete.svg" />
+              </div>
+            </li>
+
+            <li>
+              <div class="list-item">
+                <label>akjsmcie</label>
+
+                <!-- edit button -->
+                <img src="./images/edit.svg" />
+
+                <!-- delete button -->
+                <img src="./images/delete.svg" />
+              </div>
+            </li>
+            <li>
+              <div class="list-item">
+                <label>fjhizjds</label>
+
+                <!-- edit button -->
+                <img src="./images/edit.svg" />
+
+                <!-- delete button -->
+                <img src="./images/delete.svg" />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- List of all tasks-->
+
+        <!-- dropdowns and tab-bar -->
+        <div id="dropdowns">
+          <!-- Action dropdown -->
+          <div id="actions">
+            <!-- <label for="action">Action</label> -->
+            <select name="action" id="ddAction">
+              <option value="action">Action</option>
+              <option value="select-all">Select All</option>
+              <option value="unselect-all">Unselect All</option>
+              <option value="delete-selected">Delete Seclected</option>
+            </select>
+          </div>
+
+          <!-- Sort dropdown -->
+          <div id="sort">
+            <!-- <label for="sorting">Sort</label> -->
+            <select name="sorting" id="ddSort">
+              <option value="Sort">Sort</option>
+              <option value="a-z">A-Z</option>
+              <option value="z-a">Z-A</option>
+              <option value="Oldest">Oldest</option>
+              <option value="newest">Newest</option>
+            </select>
+          </div>
+
+          <!-- Activity tabs -->
+          <div id="tab-bar">
+            <button class="tab">All</button>
+            <button class="tab">Active</button>
+            <button class="tab">Completed</button>
+          </div>
+        </div>
+        <!-- dropdowns and tab-bar -->
+      </div>
+    </div>
+  </body>
+</html>
