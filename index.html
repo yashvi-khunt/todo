@@ -19,27 +19,24 @@
         <!-- Search, Add and Searchbar-->
         <div id="search">
           <!-- Add Button -->
-          <img src="./images/add.svg" />
+          <img src="./images/add.svg" id="addbtn" />
 
           <!-- Search Bar-->
-          <input type="text" placeholder="Add new task" />
+          <input
+            type="text"
+            placeholder="Add new task"
+            id="searchbar"
+            disabled
+          />
 
           <!-- Search button-->
-          <img src="./images/search.svg" />
+          <img src="./images/search.svg" id="searchbtn" />
         </div>
         <!-- Search, Add and Searchbar-->
 
         <!-- List of all tasks-->
         <div id="list">
           <ul>
-            <li>
-              <div class="list-item">
-                <label>fduhgvnjuf</label>
-                <img src="./images/edit.svg" />
-                <img src="./images/delete.svg" />
-              </div>
-            </li>
-
             <li>
               <div class="list-item">
                 <label>akjsmcie</label>
@@ -73,9 +70,13 @@
             <!-- <label for="action">Action</label> -->
             <select name="action" id="ddAction">
               <option value="action">Action</option>
-              <option value="select-all">Select All</option>
-              <option value="unselect-all">Unselect All</option>
-              <option value="delete-selected">Delete Seclected</option>
+              <option value="select-all" id="select-all">Select All</option>
+              <option value="unselect-all" id="unselect-all">
+                Unselect All
+              </option>
+              <option value="delete-selected" id="delete-selected">
+                Delete Seclected
+              </option>
             </select>
           </div>
 
@@ -84,18 +85,18 @@
             <!-- <label for="sorting">Sort</label> -->
             <select name="sorting" id="ddSort">
               <option value="Sort">Sort</option>
-              <option value="a-z">A-Z</option>
-              <option value="z-a">Z-A</option>
-              <option value="Oldest">Oldest</option>
-              <option value="newest">Newest</option>
+              <option value="a-z" id="a-z">A-Z</option>
+              <option value="z-a" id="z-a">Z-A</option>
+              <option value="oldest" id="oldest">Oldest</option>
+              <option value="newest" id="newest">Newest</option>
             </select>
           </div>
 
           <!-- Activity tabs -->
           <div id="tab-bar">
-            <button class="tab">All</button>
-            <button class="tab">Active</button>
-            <button class="tab">Completed</button>
+            <button class="tab active" id="diaplay-all">All</button>
+            <button class="tab" id="display-active">Active</button>
+            <button class="tab" id="diplay-completed">Completed</button>
           </div>
         </div>
         <!-- dropdowns and tab-bar -->
