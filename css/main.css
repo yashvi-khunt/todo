@@ -56,13 +56,14 @@
 #list div {
   border-bottom: 1px solid black;
   padding: 8px 0 2px 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr 8fr 1fr 1fr;
+  gap: 1em;
   text-align: left;
-  justify-content: space-around;
   align-items: center;
 }
-#list div label {
-  width: 80%;
+#list div .edit {
+  display: none;
 }
 #list div img {
   cursor: pointer;

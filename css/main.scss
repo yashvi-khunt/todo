@@ -71,12 +71,15 @@
   div {
     border-bottom: 1px solid black;
     padding: 8px 0 2px 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: (1fr 2fr 8fr 1fr 1fr);
+    gap: 1em;
     text-align: left;
-    justify-content: space-around;
+    // justify-content: space-between;
     align-items: center;
-    label {
-      width: 80%;
+
+    .edit {
+      display: none;
     }
     img {
       cursor: pointer;
@@ -118,7 +121,7 @@
       cursor: pointer;
       padding: 0.8em 1em;
     }
-    button:nth-child(1){
+    button:nth-child(1) {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
     }
@@ -136,7 +139,6 @@
     //background color when selected
     .active {
       background-color: #ccc;
-      
     }
   }
 }

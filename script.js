@@ -14,10 +14,10 @@ const ddSort = document.getElementById("ddSort");
 // const unSelectAll = document.getElementById("unselect-all");
 // const deleteSelected = document.getElementById("delete-selected");
 
-const ascending = document.getElementById("a-z");
-const descending = document.getElementById("z-a");
-const newest = document.getElementById("newest");
-const oldest = document.getElementById("oldest");
+// const ascending = document.getElementById("a-z");
+// const descending = document.getElementById("z-a");
+// const newest = document.getElementById("newest");
+// const oldest = document.getElementById("oldest");
 
 const btnAll = document.getElementById("display-all");
 const btnActive = document.getElementById("display-active");
@@ -33,19 +33,19 @@ let tasks = [
     taskName: "asdc",
     status: "active",
     isChecked: false,
-    id: "check0",
+    // time: 1692874082141,
   },
   {
     taskName: "water",
     status: "active",
     isChecked: false,
-    id: "check1",
+    // time: 1692874156533,
   },
   {
     taskName: "book",
     status: "completed",
     isChecked: true,
-    id: "check2",
+    // time: 1692875357689,
   },
 ];
 
@@ -76,20 +76,27 @@ const displayTask = function (taskArrName) {
                       <label>No Data Found</label>
                  </div>`;
   } else {
-    taskArrName.forEach((task, i) => {
+    taskArrName.forEach((task) => {
       // console.log(task);
       html += `
       <div class="list-item">
-        <input type="checkbox" id='check${i}' name="select" ${
+        <input type="checkbox" class='cb'  name="${task.taskName}" ${
         task.isChecked === true ? "checked " : ""
       } onclick='checkTask(this)'/>
         <label>${task.taskName}</label>
+        <span><input type="text" placeholder="Edit task" class="edit" name="${
+          task.taskName
+        }"/></span>
 
         <!-- edit button -->
-         <img src="./images/edit.svg" id='edit${i}'/>
+         <img src="./images/edit.svg" name="${
+           task.taskName
+         }" onclick='editTask(this)''/>
 
         <!-- delete button -->
-        <img src="./images/delete.svg" id='delete${i}' />
+        <img src="./images/delete.svg" name="${
+          task.taskName
+        }" onclick='deleteTask(this)' />
      </div>`;
     });
   }
@@ -117,12 +124,11 @@ const addTask = function () {
 
   //add task to array
   if (valid) {
-    const prevId = Number(tasks[tasks.length - 1].id.slice(-1));
     tasks.push({
       taskName: newTask,
       status: "active",
       isChecked: false,
-      id: `check${prevId + 1}`,
+      // time: Date.now,
     });
   }
 
@@ -131,7 +137,7 @@ const addTask = function () {
   searchBar.value = "";
 
   //display task
-  // displayTask(tasks);
+  displayTask(tasks);
 };
 
 const searchTask = function () {
@@ -226,10 +232,16 @@ btnAll.addEventListener("click", init);
 const selectUnselectAll = function (action) {
   if (action === "delete") {
     if (currentTab === "active") {
+      console.log(
+        tasks.filter((task) => {
+          return task.status === "active";
+        })
+      );
     } else {
       tasks = tasks.filter((task) => task.isChecked !== true);
     }
-    // displayTask(tasks);
+    // showElements(currentTab);
+    displayTask(tasks);
     ddAction.value = "action";
   } else {
     tasks.map((task) => {
@@ -246,8 +258,9 @@ const selectUnselectAll = function (action) {
 };
 
 const selectUnselectElement = function (element) {
+  console.log(element);
   const [selectedTask] = tasks.filter((task) => {
-    return task.id === element.id;
+    return task.taskName === element.name;
   });
   console.log(selectedTask);
   if (!selectedTask.isChecked) {
@@ -271,8 +284,59 @@ const checkTask = function (element) {
     //single element is selected
     selectUnselectElement(element);
   }
+
+  showElements(currentTab);
+};
+
+const deleteTask = function (taskElement) {
+  console.log(taskElement.name);
+
+  tasks = tasks.filter((task) => {
+    return task.taskName !== taskElement.name;
+  });
+
+  showElements(currentTab);
 };
 
 ddAction.addEventListener("change", checkTask.bind(null, "all"));
 
 init();
+
+const sortTasks = function () {
+  // console.log(currentTab);
+  const sortArray = tasks.filter((task) => {
+    if (currentTab === "all") {
+      return task;
+    } else {
+      return task.status === currentTab;
+    }
+  });
+
+  console.log(sortArray);
+  let sortDierction = ddSort.value;
+  console.log(sortDierction);
+
+  if (sortDierction === "ascending") {
+    sortArray.sort((a, b) => {
+      return a.taskName.localeCompare(b.taskName);
+    });
+  } else if (sortDierction === "descending") {
+    sortArray.sort((a, b) => {
+      return b.taskName.localeCompare(a.taskName);
+    });
+  } else if (sortDierction === "newest") {
+    // console.log("hel");
+    sortArray.reverse();
+  }
+
+  // console.log(sortArray);
+  displayTask(sortArray);
+};
+
+ddSort.addEventListener("change", sortTasks);
+
+const editTask = function (element) {
+  console.log(element);
+  const getParent = document.getElementsByName(element.name);
+  console.log(getParent);
+};
