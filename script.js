@@ -73,6 +73,8 @@ const displayTask = function (taskArrName) {
 
   if (taskArrName.length === 0) {
     html = `<div class="list-item">
+    <span></span>
+    <span></span>
                       <label>No Data Found</label>
                  </div>`;
   } else {
