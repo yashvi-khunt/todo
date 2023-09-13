@@ -10,60 +10,59 @@ const taskList = document.getElementById("list");
 
 const ddAction = document.getElementById("ddAction");
 const ddSort = document.getElementById("ddSort");
-// const selectAll = document.getElementById("select-all");
-// const unSelectAll = document.getElementById("unselect-all");
-// const deleteSelected = document.getElementById("delete-selected");
-
-// const ascending = document.getElementById("a-z");
-// const descending = document.getElementById("z-a");
-// const newest = document.getElementById("newest");
-// const oldest = document.getElementById("oldest");
 
 const btnAll = document.getElementById("display-all");
 const btnActive = document.getElementById("display-active");
 const btnCompleted = document.getElementById("display-completed");
 
 const toolTip = document.getElementById("tooltip");
-
+const status = ["active", "completed", "deleted"];
 //state variable for add & search
-let searchState, currentTab;
+let searchState, currentTab, currentSort;
 
 let tasks = [
   {
     taskName: "asdc",
     status: "active",
+
     isChecked: false,
-    // time: 1692874082141,
+    createdAt: 1692874082141,
+    modifiedAt: 1692874082141,
   },
   {
     taskName: "water",
     status: "active",
     isChecked: false,
-    // time: 1692874156533,
+    createdAt: 1692874156533,
+    modifiedAt: 1692874156533,
   },
   {
     taskName: "book",
     status: "completed",
     isChecked: true,
-    // time: 1692875357689,
+    createdAt: 1692875357689,
+    modifiedAt: 1692875357689,
   },
 ];
 
-const showElements = function (ct) {
+const showElements = function (ct, array = tasks) {
+  console.log(array);
+
   if (ct === "active") {
-    const activeTasks = tasks.filter((task) => {
+    const activeTasks = array.filter((task) => {
       // console.log("active" + task.status);
       return task.status === "active";
     });
+
     displayTask(activeTasks);
   } else if (ct === "completed") {
-    const completedTasks = tasks.filter((task) => {
+    const completedTasks = array.filter((task) => {
       // console.log("active" + task.status);
       return task.status === "completed";
     });
     displayTask(completedTasks);
   } else {
-    displayTask(tasks);
+    displayTask(array);
   }
 };
 //dislpay tasks
@@ -85,7 +84,7 @@ const displayTask = function (taskArrName) {
         <input type="checkbox" class='cb'  name="${task.taskName}" ${
         task.isChecked === true ? "checked " : ""
       } onclick='checkTask(this)'/>
-        <label>${task.taskName}</label>
+        <label name="${task.taskName}">${task.taskName}</label>
         <span><input type="text" placeholder="Edit task" class="edit" name="${
           task.taskName
         }"/></span>
@@ -130,7 +129,8 @@ const addTask = function () {
       taskName: newTask,
       status: "active",
       isChecked: false,
-      // time: Date.now,
+      createdAt: Date.now(),
+      modifiedAt: Date.now(),
     });
   }
 
@@ -139,7 +139,9 @@ const addTask = function () {
   searchBar.value = "";
 
   //display task
-  displayTask(tasks);
+  // showElements(currentTab);
+  sortTasks();
+  // displayTask(tasks);
 };
 
 const searchTask = function () {
@@ -151,7 +153,8 @@ const searchTask = function () {
       return task;
     }
   });
-  displayTask(searchElements);
+  // displayTask(searchElements);
+  showElements(currentTab, searchElements);
 };
 
 const init = function () {
@@ -305,15 +308,7 @@ ddAction.addEventListener("change", checkTask.bind(null, "all"));
 init();
 
 const sortTasks = function () {
-  // console.log(currentTab);
-  const sortArray = tasks.filter((task) => {
-    if (currentTab === "all") {
-      return task;
-    } else {
-      return task.status === currentTab;
-    }
-  });
-
+  const sortArray = tasks;
   console.log(sortArray);
   let sortDierction = ddSort.value;
   console.log(sortDierction);
@@ -328,17 +323,47 @@ const sortTasks = function () {
     });
   } else if (sortDierction === "newest") {
     // console.log("hel");
-    sortArray.reverse();
+    sortArray.sort((a, b) => {
+      if (a.createdAt > b.createdAt) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+  } else {
+    sortArray.sort((a, b) => {
+      if (a.createdAt > b.createdAt) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
   }
 
   // console.log(sortArray);
-  displayTask(sortArray);
+  showElements(currentTab, sortArray);
 };
 
 ddSort.addEventListener("change", sortTasks);
 
 const editTask = function (element) {
-  console.log(element);
+  // console.log(element.name);
   const getParent = document.getElementsByName(element.name);
   console.log(getParent);
+  const inpElement = getParent[2];
+  inpElement.style.display = "inline";
+  const [editTask] = tasks.filter((task) => {
+    return task.taskName === element.name;
+  });
+
+  inpElement.value = element.name;
+  inpElement.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      editTask.taskName = inpElement.value;
+      editTask.modifiedAt = Date.now();
+      console.log(editTask);
+      inpElement.style.display = "none";
+      getParent[1].innerText = editTask.taskName;
+    }
+  });
 };
